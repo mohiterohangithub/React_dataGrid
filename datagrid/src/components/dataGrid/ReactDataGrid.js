@@ -6,7 +6,7 @@ function ReactDataGrid() {
 
   return (
     <div className={gridStyle.gridMainParent} ref={GridRef}>
-      ReactDataGrid
+      <div className={gridStyle.mainGrid}></div>
     </div>
   );
 }
