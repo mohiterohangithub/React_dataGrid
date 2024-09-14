@@ -10,18 +10,22 @@ function App() {
       {
         key: "id",
         name: "ID",
+        width: "30",
       },
       {
         key: "first_name",
         name: "First Name",
+        width: "100",
       },
       {
         key: "last_name",
         name: "Last Name",
+        width: "100",
       },
       {
         key: "email",
         name: "Email",
+        width: "120",
       },
       {
         key: "gender",
@@ -30,6 +34,7 @@ function App() {
       {
         key: "ip_address",
         name: "Ip Address",
+        width: "100",
       },
       {
         key: "car_make",
@@ -54,9 +59,15 @@ function App() {
     ];
   }, []);
 
+  const rows = useMemo(() => {
+    return Data;
+  }, []);
+
   return (
     <div className="App">
-      <ReactDataGrid columns={columns} rows={Data} />
+      <div style={{ width: "600px", height: "600px" }}>
+        <ReactDataGrid columns={columns} rows={rows} />
+      </div>
     </div>
   );
 }
