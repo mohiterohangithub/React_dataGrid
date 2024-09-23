@@ -1,6 +1,4 @@
 import useGridStyle from "./useGridStyle";
 import useVirtualization from "./useVirtualization";
-export {
-    useGridStyle,
-    useVirtualization 
-}
+import useModifiedRow from "./useModifiedRow";
+export { useGridStyle, useVirtualization, useModifiedRow };

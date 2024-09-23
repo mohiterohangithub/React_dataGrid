@@ -1,33 +1,52 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-const useGridStyle = ({ columns, rows, rowHeight }) => {
+const useGridStyle = ({ columns, modifiedRow, rowHeight }) => {
   const [style, setStyle] = useState({
     gridTemplateColumns: "",
     gridTemplateRows: "",
+    height: "",
+    width: "",
   });
 
   const getColumnStyle = (column) => {
-    let style = "";
+    let columnsStyle = "";
+    let width = 0;
     column.forEach((element) => {
       if (element?.width) {
-        style = style + ` ${Number(element.width)}px`;
+        columnsStyle = columnsStyle + ` ${Number(element.width)}px`;
+        width = width + Number(element.width);
       } else {
-        style = style + ` 80px`;
+        columnsStyle = columnsStyle + ` 80px`;
+        width = width + 80;
       }
     });
-    return style.trim();
+    return {
+      columnsStyle: columnsStyle.trim(),
+      width,
+    };
+  };
+
+  const gridHeigh = (modifiedRow, rowHeight) => {
+    return `${Number(modifiedRow?.length) * Number(rowHeight)}px`;
   };
 
   useEffect(() => {
-    let columnsStyle = getColumnStyle(columns);
-    let rowStyle = `repeat(${rows.length},${rowHeight}px)`;
+    let { columnsStyle, width } = getColumnStyle(columns);
+    let rowStyle = `repeat(${modifiedRow?.length},${rowHeight}px)`;
+    let height = gridHeigh(modifiedRow, rowHeight);
     setStyle({
       gridTemplateColumns: columnsStyle,
       gridTemplateRows: rowStyle,
+      height,
+      width,
     });
-  }, [columns, rows]);
+  }, [columns, modifiedRow]);
 
-  return style;
+  const Style = useMemo(() => {
+    return style;
+  }, [style]);
+
+  return Style;
 };
 
 export default useGridStyle;

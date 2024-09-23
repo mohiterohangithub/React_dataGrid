@@ -1,30 +1,37 @@
 import React, { useRef } from "react";
 import gridStyle from "./reactDataGrid.module.scss";
-import Row from "../../utils/Row";
-import { useGridStyle, useVirtualization } from "../../hooks/index";
+import {
+  useGridStyle,
+  useModifiedRow,
+  useVirtualization,
+} from "../../hooks/index";
+import Row from "../row/Row";
 
 function ReactDataGrid(props) {
   const { columns, rows, rowHeight = 45 } = props;
-
+  const modifiedRow = useModifiedRow({ rows });
   const GridRef = useRef(null);
-  const ChildRef = useRef(null)
+  const ChildRef = useRef(null);
 
-  const { top, bottom } = useVirtualization({
+  const { cells, handleScroll } = useVirtualization({
     GridRef,
-    ChildRef,
-    rows,
+    modifiedRow,
     rowHeight,
   });
-  const gridStyleInline = useGridStyle({ columns, rows, rowHeight });
+  const gridStyleInline = useGridStyle({ columns, modifiedRow, rowHeight });
   return (
-    <div className={gridStyle.gridMainParent} ref={GridRef}>
+    <div
+      className={gridStyle.gridMainParent}
+      onScroll={handleScroll}
+      ref={GridRef}
+    >
       <div
         style={{ ...gridStyleInline }}
         className={gridStyle.mainGrid}
         ref={ChildRef}
       >
-        {rows.slice(top, bottom).row().map(({key, value}, index) => (
-          <div key={`${value}-${index}`} >{value}</div>
+        {cells?.map((value) => (
+          <Row cell={value} columns={columns} />
         ))}
       </div>
     </div>
