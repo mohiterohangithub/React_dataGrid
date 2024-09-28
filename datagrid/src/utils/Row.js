@@ -19,6 +19,5 @@ Array.prototype.row = function ({ columns }) {
       }
     }
   }
-  console.log('newArray',newArray );
   return newArray;
 };

@@ -10,17 +10,19 @@ function App() {
       {
         key: "id",
         name: "ID",
-        width: "30",
+        width: 30,
+        frozen: true,
       },
       {
         key: "first_name",
         name: "First Name",
-        width: "100",
+        width: 100,
+        frozen: true,
       },
       {
         key: "last_name",
         name: "Last Name",
-        width: "100",
+        width: 100,
       },
       {
         key: "email",

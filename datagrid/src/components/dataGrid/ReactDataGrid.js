@@ -6,10 +6,14 @@ import {
   useVirtualization,
 } from "../../hooks/index";
 import Row from "../row/Row";
+import ColumnContextsProvider from "../../globalcontext/ColumnContexts";
+import RowContextsProvider from "../../globalcontext/RowContexts";
+import useModifiedColumns from "../../hooks/useModifiedColumns";
 
 function ReactDataGrid(props) {
   const { columns, rows, rowHeight = 45 } = props;
   const modifiedRow = useModifiedRow({ rows });
+  const modifiedColumns = useModifiedColumns({ columns });
   const GridRef = useRef(null);
   const ChildRef = useRef(null);
 
@@ -18,23 +22,31 @@ function ReactDataGrid(props) {
     modifiedRow,
     rowHeight,
   });
-  const gridStyleInline = useGridStyle({ columns, modifiedRow, rowHeight });
+  const gridStyleInline = useGridStyle({
+    columns: modifiedColumns,
+    modifiedRow,
+    rowHeight,
+  });
   return (
-    <div
-      className={gridStyle.gridMainParent}
-      onScroll={handleScroll}
-      ref={GridRef}
-    >
-      <div
-        style={{ ...gridStyleInline }}
-        className={gridStyle.mainGrid}
-        ref={ChildRef}
-      >
-        {cells?.map((value) => (
-          <Row cell={value} columns={columns} />
-        ))}
-      </div>
-    </div>
+    <RowContextsProvider rows={modifiedRow}>
+      <ColumnContextsProvider columns={modifiedColumns}>
+        <div
+          className={gridStyle.gridMainParent}
+          onScroll={handleScroll}
+          ref={GridRef}
+        >
+          <div
+            style={{ ...gridStyleInline }}
+            className={gridStyle.mainGrid}
+            ref={ChildRef}
+          >
+            {cells?.map((value) => (
+              <Row cell={value} />
+            ))}
+          </div>
+        </div>
+      </ColumnContextsProvider>
+    </RowContextsProvider>
   );
 }
 

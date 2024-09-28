@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ColumnContexts } from "../../globalcontext/ColumnContexts";
+import useCellStyle from "../../hooks/useCellStyle";
 
 function Cell(props) {
-  const { cellData, rowNumber, columns, index } = props;
+  const { cellData, rowNumber, index } = props;
   const [key, value] = cellData;
+
+  const cellStyle = useCellStyle({ ...props });
+
   return (
     <div
-      key={`${value}-${rowNumber}-${index}`}
+      key={`${rowNumber}`}
       style={{
         width: "100%",
         height: "100%",
-        gridRow: `${rowNumber}/${rowNumber + 1}`,
-        gridColumn: `${index + 1}/${index + 2}`,
+        ...cellStyle,
       }}
     >
       {value}
