@@ -1,9 +1,10 @@
 import { useState, useEffect, useMemo } from "react";
+import useThrottle from "./useThrottle";
 
 const useVirtualization = ({ GridRef, modifiedRow, rowHeight }) => {
   const [cells, setCells] = useState([]);
 
-  const handleScroll = (e) => {
+  const handleScroll = useThrottle((e) => {
     let scrollTop = Math.floor(GridRef?.current?.scrollTop);
     const startIndex = Math.floor(scrollTop / rowHeight) || 0;
     let gridHeight = GridRef?.current?.getBoundingClientRect()?.height;
@@ -15,7 +16,7 @@ const useVirtualization = ({ GridRef, modifiedRow, rowHeight }) => {
       let array = modifiedRow.slice(startIndex, endIndex);
       setCells([...array]);
     }
-  };
+  }, 300);
 
   const firstCells = useMemo(() => {
     return Math.ceil(
