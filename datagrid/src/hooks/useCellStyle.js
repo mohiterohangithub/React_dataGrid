@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ColumnContexts } from "../globalcontext/ColumnContexts";
 
 function useCellStyle({ cellData, rowNumber, index }) {
-  const columns = useContext(ColumnContexts);
+  const { columns } = useContext(ColumnContexts);
   const [key, value] = cellData;
   const specificColumn = columns?.find((val) => val.key === key);
   const getInsetInlineStart = () => {
@@ -14,7 +14,6 @@ function useCellStyle({ cellData, rowNumber, index }) {
         : (width = width + 80);
       index--;
     }
-    console.log("width", width);
     return `${width}px`;
   };
 

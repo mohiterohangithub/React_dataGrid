@@ -2,14 +2,14 @@ import { useMemo, useContext } from "react";
 import { ColumnContexts } from "../globalcontext/ColumnContexts";
 
 function useColumnKey() {
-  const column = useContext(ColumnContexts);
+  const { columns } = useContext(ColumnContexts);
 
   const columnKey = useMemo(() => {
-    let arr = column.map(({ key }) => {
+    let arr = columns.map(({ key }) => {
       return key;
     });
     return arr;
-  }, [column]);
+  }, [columns]);
   return columnKey;
 }
 

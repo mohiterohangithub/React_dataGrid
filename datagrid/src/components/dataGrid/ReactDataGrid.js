@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import gridStyle from "./reactDataGrid.module.scss";
 import {
+  useColumnMap,
   useGridStyle,
   useModifiedRow,
   useVirtualization,
@@ -14,6 +15,7 @@ function ReactDataGrid(props) {
   const { columns, rows, rowHeight = 45 } = props;
   const modifiedRow = useModifiedRow({ rows });
   const modifiedColumns = useModifiedColumns({ columns });
+  const columnsMap = useColumnMap({ columns });
   const GridRef = useRef(null);
   const ChildRef = useRef(null);
 
@@ -29,7 +31,7 @@ function ReactDataGrid(props) {
   });
   return (
     <RowContextsProvider rows={modifiedRow}>
-      <ColumnContextsProvider columns={modifiedColumns}>
+      <ColumnContextsProvider columns={modifiedColumns} columnsMap={columnsMap}>
         <div
           className={gridStyle.gridMainParent}
           onScroll={handleScroll}

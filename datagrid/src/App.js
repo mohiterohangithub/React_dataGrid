@@ -5,19 +5,31 @@ import ReactDataGrid from "./components/dataGrid/ReactDataGrid";
 import Data from "../src/data/MOCK_DATA .json";
 
 function App() {
+  const renderEditCellFunc = ({ cellValue, column, rowIndex }) => {
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          color: "black",
+        }}
+      >
+        {cellValue}-{rowIndex}
+      </div>
+    );
+  };
+
   const columns = useMemo(() => {
     return [
       {
         key: "id",
         name: "ID",
         width: 30,
-        frozen: true,
       },
       {
         key: "first_name",
         name: "First Name",
         width: 100,
-        frozen: true,
       },
       {
         key: "last_name",
@@ -27,11 +39,12 @@ function App() {
       {
         key: "email",
         name: "Email",
-        width: "120",
+        width: "300",
       },
       {
         key: "gender",
         name: "Gender",
+        renderEditCell: renderEditCellFunc,
       },
       {
         key: "ip_address",
