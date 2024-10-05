@@ -12,7 +12,7 @@ import RowContextsProvider from "../../globalcontext/RowContexts";
 import useModifiedColumns from "../../hooks/useModifiedColumns";
 
 function ReactDataGrid(props) {
-  const { columns, rows, rowHeight = 45 } = props;
+  const { columns, rows, rowHeight = 45, onRowChange } = props;
   const modifiedRow = useModifiedRow({ rows });
   const modifiedColumns = useModifiedColumns({ columns });
   const columnsMap = useColumnMap({ columns });
@@ -30,7 +30,7 @@ function ReactDataGrid(props) {
     rowHeight,
   });
   return (
-    <RowContextsProvider rows={modifiedRow}>
+    <RowContextsProvider rows={modifiedRow} onRowChange={onRowChange}>
       <ColumnContextsProvider columns={modifiedColumns} columnsMap={columnsMap}>
         <div
           className={gridStyle.gridMainParent}

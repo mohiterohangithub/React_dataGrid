@@ -3,7 +3,7 @@ import { ColumnContexts } from "../globalcontext/ColumnContexts";
 
 function useCellStyle({ cellData, rowNumber, index }) {
   const { columns } = useContext(ColumnContexts);
-  const [key, value] = cellData;
+  const [key, ] = cellData;
   const specificColumn = columns?.find((val) => val.key === key);
   const getInsetInlineStart = () => {
     let width = 0;
@@ -24,13 +24,11 @@ function useCellStyle({ cellData, rowNumber, index }) {
       zIndex: 5,
       gridRow: `${rowNumber}/${rowNumber + 1}`,
       gridColumn: `${index + 1}/${index + 2}`,
-      backgroundColor: "red",
     };
   } else {
     return {
       gridRow: `${rowNumber}/${rowNumber + 1}`,
       gridColumn: `${index + 1}/${index + 2}`,
-      backgroundColor: "while",
     };
   }
 }

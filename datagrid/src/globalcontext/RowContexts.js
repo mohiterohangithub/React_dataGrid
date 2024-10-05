@@ -3,10 +3,12 @@ import React from "react";
 export const RowContexts = React.createContext([]);
 
 function RowContextsProvider(props) {
-  const { rows } = props;
+  const { rows, onRowChange } = props;
 
   return (
-    <RowContexts.Provider value={rows}>{props.children}</RowContexts.Provider>
+    <RowContexts.Provider value={{ rows, onRowChange }}>
+      {props.children}
+    </RowContexts.Provider>
   );
 }
 
