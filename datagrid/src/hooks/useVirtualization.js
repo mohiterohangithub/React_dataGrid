@@ -16,7 +16,7 @@ const useVirtualization = ({ GridRef, modifiedRow, rowHeight }) => {
       let array = modifiedRow.slice(startIndex, endIndex);
       setCells([...array]);
     }
-  }, 300);
+  }, 100);
 
   const firstCells = useMemo(() => {
     return Math.ceil(
