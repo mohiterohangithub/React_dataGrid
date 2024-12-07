@@ -20,6 +20,7 @@ function MainGrid({ rowHeight, modifiedRow, modifiedColumns }) {
 
   return (
     <div
+      id="reactDataGridMainComponent"
       className={gridStyle.gridMainParent}
       onScroll={handleScroll}
       ref={GridRef}
@@ -29,8 +30,8 @@ function MainGrid({ rowHeight, modifiedRow, modifiedColumns }) {
         className={gridStyle.mainGrid}
         ref={ChildRef}
       >
-        {cells?.map((value) => (
-          <Row cell={value} />
+        {cells?.map((value, index) => (
+          <Row key={value.rowID} cell={value} />
         ))}
       </div>
     </div>

@@ -12,7 +12,7 @@ function Cell(props) {
   return (
     <div
       style={{ width: "100%", height: "100%", ...cellStyle }}
-      key={`${rowNumber}`}
+      key={`${rowNumber}-${value}`}
     >
       {renderEditCell || cellRenderer ? (
         <div

@@ -13,7 +13,7 @@ function Row({ cell }) {
       {Object.entries(modifiedCell)
         .filter(([key, value]) => key !== "rowID")
         .map((cellData, index) => (
-          <Cell cellData={cellData} rowNumber={rowNumber} index={index} />
+          <Cell key={`${rowNumber}-${index}`} cellData={cellData} rowNumber={rowNumber} index={index} />
         ))}
     </>
   );
