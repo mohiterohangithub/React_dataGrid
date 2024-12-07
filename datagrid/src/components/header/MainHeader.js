@@ -41,7 +41,7 @@ function Header({ rowHeight, modifiedRow, modifiedColumns }) {
       }}
     >
       {modifiedColumns.map((value, index) => (
-        <HeaderCell key={`${value}-${index}`} header={value} />
+        <HeaderCell key={`${value}-${index}`} header={value} index={index} />
       ))}
     </div>
   );
