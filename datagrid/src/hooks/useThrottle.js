@@ -1,13 +1,26 @@
 function useThrottle(callBack, delay = 100) {
+  let waitingArgs = null;
   let isWaiting = false;
-  return (...args) => {
-    if (!isWaiting) {
-      callBack(...args);
-      isWaiting = true;
-      setTimeout(() => {
-        isWaiting = false;
-      }, delay);
+
+  const timeoutFunc = () => {
+    if (waitingArgs === null) {
+      isWaiting = false;
+    } else {
+      callBack(...waitingArgs);
+      waitingArgs = null;
+      setTimeout(timeoutFunc, delay);
     }
+  };
+
+  return (...args) => {
+    if (isWaiting) {
+      waitingArgs = args;
+      return;
+    }
+    callBack(...args);
+    isWaiting = true;
+
+    setTimeout(timeoutFunc, delay);
   };
 }
 
