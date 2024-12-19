@@ -1,11 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
+import { ColumnContexts } from "../../globalcontext/ColumnContexts";
 import gridStyle from "./reactDataGrid.module.scss";
 import { useGridStyle, useVirtualization } from "../../hooks";
 import Row from "../row/Row";
 
-function MainGrid({ rowHeight, modifiedRow, modifiedColumns }) {
+function MainGrid({ rowHeight, modifiedRow }) {
   const GridRef = useRef(null);
   const ChildRef = useRef(null);
+  const { modifiedColumns } = useContext(ColumnContexts);
   const { cells, handleScroll } = useVirtualization({
     GridRef,
     modifiedRow,

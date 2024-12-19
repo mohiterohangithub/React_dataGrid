@@ -6,3 +6,35 @@
   border: 1px solid black;
   background-color: white;
 }
+
+.resizable {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  .headercell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    background-color: white;
+  }
+  .resizer {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: absolute;
+    cursor: col-resize;
+
+    right: 0;
+    top: 50%;
+    transform: translate(50%, -50%);
+
+    height: 2rem;
+    width: 0.25rem;
+  }
+  &:hover .resizer {
+    background: rgb(99 102 241);
+  }
+}

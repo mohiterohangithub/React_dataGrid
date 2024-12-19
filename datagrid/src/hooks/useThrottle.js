@@ -17,6 +17,7 @@ function useThrottle(callBack, delay = 100) {
       waitingArgs = args;
       return;
     }
+
     callBack(...args);
     isWaiting = true;
 

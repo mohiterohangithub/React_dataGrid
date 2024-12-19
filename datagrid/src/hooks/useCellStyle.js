@@ -2,15 +2,15 @@ import { useContext } from "react";
 import { ColumnContexts } from "../globalcontext/ColumnContexts";
 
 function useCellStyle({ cellData, rowNumber, index }) {
-  const { columns } = useContext(ColumnContexts);
+  const { modifiedColumns } = useContext(ColumnContexts);
   const [key, ] = cellData;
-  const specificColumn = columns?.find((val) => val.key === key);
+  const specificColumn = modifiedColumns?.find((val) => val.key === key);
   const getInsetInlineStart = () => {
     let width = 0;
-    let index = columns.findIndex((val) => val.key === key);
+    let index = modifiedColumns.findIndex((val) => val.key === key);
     while (index) {
-      Boolean(columns[index - 1]?.width)
-        ? (width = width + columns[index - 1]["width"])
+      Boolean(modifiedColumns[index - 1]?.width)
+        ? (width = width + modifiedColumns[index - 1]["width"])
         : (width = width + 80);
       index--;
     }

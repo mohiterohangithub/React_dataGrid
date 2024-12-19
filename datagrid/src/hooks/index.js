@@ -5,6 +5,7 @@ import useDebounce from "./useDebounce";
 import useThrottle from "./useThrottle";
 import useColumnKey from "./useColumnKey";
 import useColumnMap from "./useColumnMap";
+import useResizeHeader from "./useResizeHeader";
 export {
   useGridStyle,
   useVirtualization,
@@ -13,4 +14,5 @@ export {
   useThrottle,
   useColumnKey,
   useColumnMap,
+  useResizeHeader,
 };
