@@ -17,7 +17,7 @@ function ReactDataGrid(props) {
       <ColumnContextsProvider columns={modifiedColumns} columnsMap={columnsMap}>
         <div style={{ width: "100%", height: "100%" }}>
           <MainHeader rowHeight={rowHeight} modifiedRow={modifiedRow} />
-          <MainGrid rowHeight={rowHeight} modifiedRow={modifiedRow} />
+          <MainGrid rowHeight={rowHeight} />
         </div>
       </ColumnContextsProvider>
     </RowContextsProvider>

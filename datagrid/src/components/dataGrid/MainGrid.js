@@ -1,22 +1,24 @@
 import React, { useRef, useContext } from "react";
 import { ColumnContexts } from "../../globalcontext/ColumnContexts";
+import { RowContexts } from "../../globalcontext/RowContexts";
 import gridStyle from "./reactDataGrid.module.scss";
 import { useGridStyle, useVirtualization } from "../../hooks";
 import Row from "../row/Row";
 
-function MainGrid({ rowHeight, modifiedRow }) {
+function MainGrid({ rowHeight }) {
   const GridRef = useRef(null);
   const ChildRef = useRef(null);
   const { modifiedColumns } = useContext(ColumnContexts);
+  const { rows } = useContext(RowContexts);
   const { cells, handleScroll } = useVirtualization({
     GridRef,
-    modifiedRow,
+    modifiedRow: rows,
     rowHeight,
   });
 
   const gridStyleInline = useGridStyle({
     columns: modifiedColumns,
-    modifiedRow,
+    modifiedRow: rows,
     rowHeight,
   });
 
