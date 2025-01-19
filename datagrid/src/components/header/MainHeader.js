@@ -1,6 +1,6 @@
 import React, { useRef, useMemo, useEffect, useContext } from "react";
 import { ColumnContexts } from "../../globalcontext/ColumnContexts";
-import { useGridStyle, useThrottle } from "../../hooks";
+import { useGridStyle, useSort, useThrottle } from "../../hooks";
 import s from "./mainHeader.module.scss";
 import HeaderCell from "./HeaderCell";
 import useMainHeader from "../../hooks/useMainHeader";
@@ -14,6 +14,7 @@ function Header({ rowHeight, modifiedRow }) {
     rowHeight,
   });
 
+  const sort = useSort();
   const grid = useMemo(() => {
     return document.getElementById("reactDataGridMainComponent");
   }, [document.getElementById("reactDataGridMainComponent")]);
@@ -42,7 +43,12 @@ function Header({ rowHeight, modifiedRow }) {
       }}
     >
       {modifiedColumns.map((value, index) => (
-        <HeaderCell key={`${value}-${index}`} header={value} index={index} />
+        <HeaderCell
+          sort={sort}
+          key={`${value}-${index}`}
+          header={value}
+          index={index}
+        />
       ))}
     </div>
   );

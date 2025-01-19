@@ -6,6 +6,7 @@ import useThrottle from "./useThrottle";
 import useColumnKey from "./useColumnKey";
 import useColumnMap from "./useColumnMap";
 import useResizeHeader from "./useResizeHeader";
+import useSort from "./useSort";
 export {
   useGridStyle,
   useVirtualization,
@@ -15,4 +16,5 @@ export {
   useColumnKey,
   useColumnMap,
   useResizeHeader,
+  useSort,
 };

@@ -2,8 +2,9 @@ import React from "react";
 import s from "./headercell.module.scss";
 import useHeaderCellStyle from "../../hooks/useHeaderCellStyle";
 import ResizableHeaderCell from "./ResizableHeaderCell";
+import { IconCaretDown } from "../../assets/icons/index";
 
-function HeaderCell({ header, index }) {
+function HeaderCell({ header, index, sort }) {
   const headerCellStyle = useHeaderCellStyle({ header, index });
 
   return (
@@ -16,7 +17,10 @@ function HeaderCell({ header, index }) {
           style={{ ...headerCellStyle }}
           className={s.headercell}
         >
-          {header.name}
+          <p>{header.name}</p>
+          <div className={s.icon} onClick={() => sort(header.key)}>
+            <IconCaretDown />
+          </div>
         </div>
       )}
     </>
