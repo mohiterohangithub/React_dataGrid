@@ -6,10 +6,13 @@ import {
   useState,
 } from "react";
 import { RowContexts } from "../globalcontext/RowContexts";
+import { ColumnContexts } from "../globalcontext/ColumnContexts";
 
 function useSort() {
   const [columnName, setColumnName] = useState({ name: null });
   const { defaultRows, setRows } = useContext(RowContexts);
+  const { modifiedColumns, setModifiedColumns } = useContext(ColumnContexts);
+
   const sortingOrder = useRef(["ascending", "descending", "default"]);
   const sortedColumn = useRef({
     columnName: null,
@@ -57,6 +60,23 @@ function useSort() {
         rowArray.push({ ...obj, rowID: count });
         count++;
       }
+      const columns = modifiedColumns.map((obj) => {
+        if (obj.key === sortedColumn?.current?.columnName) {
+          return {
+            ...obj,
+            sorting: {
+              order: sortedColumn?.current?.sortingOrder,
+            },
+          };
+        } else {
+          if (obj.hasOwnProperty("sorting")) {
+            delete obj.sorting;
+            return obj;
+          }
+          return obj;
+        }
+      });
+      setModifiedColumns(columns);
       setRows(rowArray);
     }
   }, [columnName]);
